@@ -1,6 +1,5 @@
 import BPMN4CPPropertiesProvider from './BPMN4CPPropertiesProvider';
 import DefaultPropertyValuesProvider from './DefaultPropertyValuesProvider';
-
 export default {
   __init__: [
     'propertiesProvider',

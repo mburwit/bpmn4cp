@@ -63,7 +63,7 @@ function DurationTimerEventDefinition(
           const value = durationDefinition.get('duration');
           if (!value)
             return {
-              duration: translate('Must provide a value'),
+              duration: translate('Must provide a value!'),
             };
         } else {
           durationDefinition = timerDefinition.get('timeCycle');
@@ -74,7 +74,7 @@ function DurationTimerEventDefinition(
           const unit = durationDefinition.get('unit');
           if (unit && !value)
             return {
-              duration: translate('Must provide a value'),
+              duration: translate('Must provide a value!'),
             };
           if (durationMax && !value) {
             return {
@@ -200,12 +200,12 @@ function DurationTimerEventDefinition(
           if (duration) {
             if (!unit) {
               return {
-                durationUnit: translate('Must provide a unit!'),
+                durationUnit: translate('Must provide a value!'),
               };
             } else if (!['s', 'min', 'h', 'd', 'wk', 'mo', 'a'].includes(
               unit)) {
               return {
-                durationUnit: translate('This is not a valid time unit!'),
+                durationUnit: translate('Must be a valid time unit!'),
               };
             }
           }

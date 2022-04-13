@@ -458,12 +458,12 @@ function CycleTimerEventDefinition(
           if (period) {
             if (!unit) {
               return {
-                periodUnit: translate('Must provide a unit!'),
+                periodUnit: translate('Must provide a value!'),
               };
             } else if (!['s', 'min', 'h', 'd', 'wk', 'mo', 'a'].includes(
               unit)) {
               return {
-                periodUnit: translate('This is not a valid time unit!'),
+                periodUnit: translate('Must be a valid time unit!'),
               };
             }
           }

@@ -61,7 +61,7 @@ function TimeCycleBoundsInputs(
           const value = parseInt(boundsDuration.get('value'));
           if (!value)
             return {
-              value: translate('Must provide a value'),
+              value: translate('Must provide a value!'),
             };
         }
       }
@@ -103,12 +103,12 @@ function TimeCycleBoundsInputs(
           const unit = boundsDuration.get('unit');
           if (!unit) {
             return {
-              unit: translate('Must provide a unit!'),
+              unit: translate('Must provide a value!'),
             };
           } else if (!['s', 'min', 'h', 'd', 'wk', 'mo', 'a'].includes(
             unit)) {
             return {
-              unit: translate('This is not a valid time unit!'),
+              unit: translate('Must be a valid time unit!'),
             };
           }
         }
@@ -165,7 +165,7 @@ function TimeCycleBoundsInputs(
           const lowUnit = boundsRange.get("low") ? boundsRange.get("low").get("unit") : undefined;
           if (lowUnit && !lowValue)
             return {
-              lowerValue: translate('Must provide a value or remove lower unit!'),
+              lowerValue: translate('Must provide a value or remove unit!'),
             };
           const highValue = boundsRange.get("high") ? boundsRange.get("high").get("value") : undefined;
           const highUnit = boundsRange.get("high") ? boundsRange.get("high").get("unit") : undefined;
@@ -230,7 +230,7 @@ function TimeCycleBoundsInputs(
           } else if (lowUnit && !['s', 'min', 'h', 'd', 'wk', 'mo', 'a'].includes(
             lowUnit)) {
             return {
-              lowerUnit: translate('This is not a valid time unit!'),
+              lowerUnit: translate('Must be a valid time unit!'),
             };
           }
           const highValue = boundsRange.get("high") ? boundsRange.get("high").get("value") : undefined;
@@ -291,7 +291,7 @@ function TimeCycleBoundsInputs(
           const highUnit = boundsRange.get("high") ? boundsRange.get("high").get("unit") : undefined;
           if (highUnit && !highValue)
             return {
-              upperValue: translate('Must provide a value or remove upper unit!'),
+              upperValue: translate('Must provide a value or remove unit!'),
             };
           const lowValue = boundsRange.get("low") ? boundsRange.get("low").get("value") : undefined;
           const lowUnit = boundsRange.get("low") ? boundsRange.get("low").get("unit") : undefined;
@@ -356,7 +356,7 @@ function TimeCycleBoundsInputs(
           } else if (highUnit && !['s', 'min', 'h', 'd', 'wk', 'mo', 'a'].includes(
             highUnit)) {
             return {
-              upperUnit: translate('This is not a valid time unit!'),
+              upperUnit: translate('Must be a valid time unit!'),
             };
           }
           const lowValue = boundsRange.get("low") ? boundsRange.get("low").get("value") : undefined;

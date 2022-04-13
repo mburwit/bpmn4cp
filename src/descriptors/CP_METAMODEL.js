@@ -1,4 +1,4 @@
-export const METAMODEL = {
+export const CP_METAMODEL = {
   'name': 'BPMN4CP',
   'prefix': 'cp',
   'uri': 'http://www.helict.de/bpmn4cp',

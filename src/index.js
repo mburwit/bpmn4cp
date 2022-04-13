@@ -1,14 +1,20 @@
 import inherits from 'inherits';
 import Modeler from "bpmn-js/lib/Modeler";
 import PropertiesPanelModule from "bpmn-js-properties-panel";
-import {default as PropertiesProviderModule} from "./provider/propertiesProvider"
-import {default as ContextPadProviderModule} from "./provider/context-pad"
-import {default as PopupMenuProviderModule} from "./provider/popup-menu"
-import {default as ModelingModule} from "./provider/modeling"
-import {default as AutoPlaceModule} from "./provider/auto-place"
+import {default as propertiesPanel} from "./propertiesPanel"
 import {default as DrawModule} from "./draw"
-import {default as Bpmn4cpRules} from "./provider/rules"
-import {METAMODEL} from "./descriptors/metamodel";
+import {CP_METAMODEL} from "./descriptors/CP_METAMODEL";
+import {I18N_METAMODEL} from "./descriptors/I18N_METAMODEL";
+import {default as importModule} from './import';
+import {
+    autoPlaceModule,
+    contextPadProviderModule,
+    modelingModule,
+    popupMenuProviderModule,
+    bpmn4cpRules,
+    labelEditingModule,
+    searchModule
+} from "./features";
 
 /**
  * A viewer that includes mouse navigation and other goodies.
@@ -18,16 +24,20 @@ import {METAMODEL} from "./descriptors/metamodel";
 export function BpmnModeler(options) {
     options.additionalModules = [
         PropertiesPanelModule,
-        PropertiesProviderModule,
-        ContextPadProviderModule,
-        PopupMenuProviderModule,
-        ModelingModule,
-        AutoPlaceModule,
+        propertiesPanel,
+        contextPadProviderModule,
+        popupMenuProviderModule,
+        modelingModule,
+        autoPlaceModule,
         DrawModule,
-        Bpmn4cpRules
+        bpmn4cpRules,
+        labelEditingModule,
+        searchModule,
+        importModule
     ].concat(options.additionalModules)
     options.moddleExtensions = Object.assign({
-        cp: METAMODEL
+        cp: CP_METAMODEL,
+        i18n: I18N_METAMODEL
     }, options.moddleExtensions);
     Modeler.call(this, options);
 }

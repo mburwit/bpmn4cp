@@ -13,8 +13,9 @@ import linkProps
 import documentationProps
   from 'bpmn-js-properties-panel/lib/provider/bpmn/parts/DocumentationProps';
 import idProps from 'bpmn-js-properties-panel/lib/provider/bpmn/parts/IdProps';
-import nameProps
-  from 'bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProps';
+// import nameProps
+//   from 'bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProps';
+import nameProps from './parts/NameProps';
 import observationProps from './parts/ObservationProps';
 import observationDetails from './parts/ObservationDetailProps';
 import activityProps from './parts/ActivityProps';
@@ -41,7 +42,7 @@ function createGeneralTabGroups(
 
   const generalGroup = {
     id: 'general',
-    label: 'General',
+    label: translate('General'),
     entries: [],
   };
   idProps(generalGroup, element, translate);
@@ -90,7 +91,7 @@ function createGeneralTabGroups(
 
   const detailsGroup = {
     id: 'details',
-    label: 'Details',
+    label: translate('Details'),
     entries: [],
   };
   linkProps(detailsGroup, element, translate);
@@ -98,7 +99,7 @@ function createGeneralTabGroups(
 
   const documentationGroup = {
     id: 'documentation',
-    label: 'Documentation',
+    label: translate('Documentation'),
     entries: [],
   };
 
@@ -117,7 +118,7 @@ function createColorTabGroups(
   element, bpmnFactory, canvas, elementRegistry, modeling, translate) {
   const colorGroup = {
     id: 'colorGroup',
-    label: 'Colors',
+    label: translate('Colors'),
     entries: [],
   };
   colorPicker(colorGroup, element, modeling, translate);
@@ -139,7 +140,7 @@ export default function BPMN4CPPropertiesProvider(
 
     const generalTab = {
       id: 'general',
-      label: 'General',
+      label: translate('General'),
       groups: createGeneralTabGroups(element, bpmnFactory, canvas,
         elementRegistry, translate),
     };
@@ -150,7 +151,7 @@ export default function BPMN4CPPropertiesProvider(
     if (element.businessObject.di) {
       const colorTab = {
         id: 'color',
-        label: 'Colors',
+        label: translate('Colors'),
         groups: createColorTabGroups(element, bpmnFactory, canvas,
           elementRegistry, modeling, translate),
       };

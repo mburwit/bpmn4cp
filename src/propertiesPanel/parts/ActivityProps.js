@@ -38,12 +38,12 @@ export default function(group, element, translate) {
       id: 'activity-code',
       label: translate('Code'),
       description: translate(
-        'Specify more than one code as a comma separated list.\nAvailable Codes are: ' +
+        'Specify more than one value as a comma separated list.') + '\n' + translate('Available values are:') + ' ' +
         actionCodeOptions().map((option) => {
           return ' ' + option.value;
         }).filter((option) => {
           return option !== ' ';
-        })),
+        }),
       modelProperty: 'code',
 
       set: function(elem, values) {
@@ -61,9 +61,9 @@ export default function(group, element, translate) {
           });
           if (codes.length > 0) {
             return {
-              code: translate('Unknown codes:' + codes.map(code => {
+              code: translate('Unknown codes:') + ' ' + codes.map(code => {
                 return ' ' + code;
-              })),
+              }),
             };
           }
         }

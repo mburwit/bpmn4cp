@@ -51,7 +51,7 @@ export default function (group, element, bpmnFactory, options, translate) {
             const observationCode = observation && observation.get('code');
             if (!observationCode)
                 return {
-                    code: "Must select a valid observation type!",
+                    code: translate("Must select a valid observation type!"),
                 };
         }
     });

@@ -45,6 +45,14 @@ export default function BPMN4CPContextPadProvider(
 
     // TODO: continue with custom context pad entries here
 
+    // enable appending observation feature to activities
+    // if (is(businessObject, 'bpmn:Activity')) {
+    //   assign(actions, {
+    //     'append.observation-feature': appendAction('cp:ObservationFeature',
+    //       'bpmn4cp-icon-observation'),
+    //   });
+    // }
+
     // enable appending goal states to conditional events, event-based gateways and actions
     if ((is(businessObject, 'bpmn:CatchEvent') &&
       businessObject.eventDefinitions &&
