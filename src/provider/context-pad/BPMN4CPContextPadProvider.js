@@ -45,22 +45,13 @@ export default function BPMN4CPContextPadProvider(
 
     // TODO: continue with custom context pad entries here
 
-    // enable appending quality indicators
-    if (is(businessObject, 'bpmn:FlowElement') && !is(businessObject, 'cp:QualityIndicator')) {
-      assign(actions, {
-        'append.quality-indicator': appendAction('cp:QualityIndicator',
-          'bpmn4cp-icon-qualityindicator'),
-      });
-    }
-
-    // enable appending goal states to conditional events, event-based gateways, activities and quality indicators
+    // enable appending goal states to conditional events, event-based gateways and actions
     if ((is(businessObject, 'bpmn:CatchEvent') &&
       businessObject.eventDefinitions &&
       is(businessObject.eventDefinitions[0],
         'bpmn:ConditionalEventDefinition'))
       || (is(businessObject, 'bpmn:EventBasedGateway'))
-    || (is(businessObject, 'bpmn:Activity'))
-      || (is(businessObject, 'cp:QualityIndicator'))) {
+    || (is(businessObject, 'bpmn:Activity'))) {
       assign(actions, {
         'append.goal-state': appendAction('cp:GoalState',
           'bpmn4cp-icon-target'),

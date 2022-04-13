@@ -82,7 +82,7 @@ function canConnect(source, target, connection) {
   // despite associations, deny all other connections from/to
   // observation features, goal states and QIs
   if (isObservationFeature(source) || isObservationFeature(target)
-    || isGoalState(source) || isGoalState(target) || isQualityIndicator(source) ||isQualityIndicator(target)) {
+    || isGoalState(source) || isGoalState(target)) {
     if (canConnectAssociation(source, target)) {
       return {
         type: 'bpmn:Association',
@@ -122,13 +122,6 @@ function canConnectAssociation(source, target) {
   if (isGoalState(target)) {
     return canConnectGoalState(source);
   }
-  // allow connection of associations from/to quality indicators
-  if (isQualityIndicator(source)) {
-    return canConnectQI(target);
-  }
-  if (isQualityIndicator(target)) {
-    return canConnectQI(source);
-  }
   // enable default connections
   return !!BpmnRules.prototype.canConnectAssociation.call(this, source, target);
 }
@@ -148,22 +141,12 @@ function canConnectObservationFeature(target) {
  */
 function canConnectGoalState(target) {
   return is(target, 'bpmn:Activity')
-    || is(target, 'cp:QualityIndicator')
     || is(target, 'bpmn:TextAnnotation')
     || ((is(target, 'bpmn:CatchEvent') &&
       target.businessObject.eventDefinitions &&
       is(target.businessObject.eventDefinitions[0],
         'bpmn:ConditionalEventDefinition'))
       || (is(target, 'bpmn:EventBasedGateway')));
-}
-
-/**
- * Check, whether the other side of the relationship
- * is a FlowElement.
- */
-function canConnectQI(target) {
-  return is(target, 'bpmn:FlowElement')
-    || is(target, 'bpmn:TextAnnotation');
 }
 
 /**
@@ -180,8 +163,4 @@ function isObservationFeature(element) {
 
 function isGoalState(element) {
   return is(element, 'cp:GoalState');
-}
-
-function isQualityIndicator(element) {
-  return is(element, 'cp:QualityIndicator');
 }

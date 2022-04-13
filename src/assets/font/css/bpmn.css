@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'bpmn4cp';
-  src:  url('../bpmn4cp.eot?kr7x6z');
-  src:  url('../bpmn4cp.eot?kr7x6z#iefix') format('embedded-opentype'),
-  url('../bpmn4cp.ttf?kr7x6z') format('truetype'),
-  url('../bpmn4cp.woff?kr7x6z') format('woff'),
-  url('../bpmn4cp.svg?kr7x6z#bpmn4cp') format('svg');
+  src:  url('../bpmn4cp.eot?i6bfi2');
+  src:  url('../bpmn4cp.eot?i6bfi2#iefix') format('embedded-opentype'),
+  url('../bpmn4cp.ttf?i6bfi2') format('truetype'),
+  url('../bpmn4cp.woff?i6bfi2') format('woff'),
+  url('../bpmn4cp.svg?i6bfi2#bpmn4cp') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -34,10 +34,6 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.bpmn4cp-icon-qualityindicator:before {
-  content: "\e900";
 }
 .bpmn4cp-icon-game:before {
   content: "\e915";
