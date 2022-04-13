@@ -14,10 +14,30 @@ export const METAMODEL = {
       ],
       'properties': [
         {
+          'name': 'codeSystem',
+          'isAttr': true,
+          'type': 'String',
+        },
+        {
           'name': 'code',
           'isAttr': true,
           'type': 'String',
         },
+        {
+          'name': 'contextSystem',
+          'isAttr': true,
+          'type': 'String',
+        },
+        {
+          'name': 'contextConfigSystem',
+          'isAttr': true,
+          'type': 'String',
+        },
+        {
+          'name': 'contextConfigCode',
+          'isAttr': true,
+          'type': 'String',
+        }
       ],
     },
     {
