@@ -1,0 +1,16 @@
+.bpmn4cp-icon-qualityindicator:before {
+  content: "\e900";
+}
+
+.bpmn4cp-icon-game:before {
+  content: "\e915";
+}
+.bpmn4cp-icon-observation:before {
+  content: "\e9a6";
+}
+.bpmn4cp-icon-target:before {
+  content: "\e9b3";
+}
+.bpmn4cp-icon-virtual:before {
+  content: "\eaa1";
+}

@@ -1,0 +1,6 @@
+export {default as autoPlaceModule} from "./auto-place"
+export {default as contextPadProviderModule} from "./context-pad"
+export {default as modelingModule} from "./modeling"
+export {default as popupMenuProviderModule} from "./popup-menu"
+export {default as propertiesProviderModule} from "./propertiesProvider"
+export {default as bpmn4cpRules} from "./rules"
