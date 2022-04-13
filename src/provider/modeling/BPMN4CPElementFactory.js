@@ -23,5 +23,9 @@ BPMN4CPElementFactory.prototype._getDefaultSize = function(semantic) {
     return { width: 36, height: 36 };
   }
 
+  if (is(semantic, 'cp:QualityIndicator')) {
+    return { width: 36, height: 36 };
+  }
+
   return ElementFactory.prototype._getDefaultSize.call(this, semantic);
 };

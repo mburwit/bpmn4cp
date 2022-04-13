@@ -19,6 +19,7 @@ import observationProps from './parts/ObservationProps';
 import observationDetails from './parts/ObservationDetailProps';
 import activityProps from './parts/ActivityProps';
 import subProcessProps from './parts/SubProcessProps';
+import qualityIndicatorProperties from './parts/QualityIndicatorProperties';
 
 import colorPicker from './parts/ColorPicker'
 
@@ -53,6 +54,7 @@ function createGeneralTabGroups(
   }
   activityProps(generalGroup, element, translate);
   subProcessProps(generalGroup, element, translate);
+  qualityIndicatorProperties(generalGroup, element, bpmnFactory, translate);
   processProps(generalGroup, element, translate);
 
   const observationGroup = {
