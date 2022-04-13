@@ -7,6 +7,8 @@ const elementHelper = require(
     './EventDefinitionHelper');
 const {forEach} = require("min-dash");
 
+const boundsInputs = require("./TimeCycleBoundsInputs");
+
 function CycleTimerEventDefinition(
   group, element, bpmnFactory, timerEventDefinition, prefix, translate) {
 
@@ -104,6 +106,8 @@ function CycleTimerEventDefinition(
     hidden: isNotCycleTimer,
 
   }));
+  boundsInputs(group, element, bpmnFactory, timerEventDefinition, prefix,
+      translate);
   group.entries.push(entryFactory.textField(translate, {
     id: prefix + 'timer-event-definition-timeCycle-count',
     label: translate('Count'),
