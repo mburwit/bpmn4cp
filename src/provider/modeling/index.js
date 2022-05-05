@@ -26,7 +26,7 @@ export default {
     'bpmnUpdater',
   ],
   __depends__: [
-    // BPMN4CPBehaviorModule,
+    BPMN4CPBehaviorModule,
     BehaviorModule,
     RulesModule,
     OrderingModule,

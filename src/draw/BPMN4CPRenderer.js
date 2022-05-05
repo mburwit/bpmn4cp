@@ -92,7 +92,7 @@ export default function BPMN4CPRenderer(
     }
   };
 
-  const handlers = this.handlers = assign(additionalHandlers, this.handlers);
+  this.handlers = assign(this.handlers, additionalHandlers);
 
   function getQIFillColor(elem) {
     return getSemantic(elem).get('fillColor') || defaultFillColor;
@@ -169,10 +169,6 @@ export default function BPMN4CPRenderer(
       fill: fill,
       stroke: stroke,
     });
-  }
-
-  function renderer(type) {
-    return handlers[type];
   }
 
 // extension API, use at your own risk

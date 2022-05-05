@@ -21,6 +21,32 @@ export const METAMODEL = {
       ],
     },
     {
+      'name': 'Actor',
+      'superClass': ['Element'],
+      'meta': {
+        'allowedIn': [
+          'bpmn:Activity',
+        ],
+      },
+      'properties': [
+        {
+          'name': 'name',
+          'isAttr': true,
+          'type': 'String',
+        },
+        {
+          'name': 'code',
+          'isAttr': true,
+          'type': 'String',
+        },
+        {
+          'name': 'codeSystem',
+          'isAttr': true,
+          'type': 'String',
+        },
+      ],
+    },
+    {
       'name': 'SubProcess',
       'extends': ['bpmn:SubProcess'],
       'properties': [

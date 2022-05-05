@@ -1,8 +1,11 @@
-import CalculateNameBehavior from './CalculateNameBehavior';
+// import CalculateNameBehavior from './CalculateNameBehavior';
+import ActorUpdateInterceptor from "./ActorUpdateInterceptor";
 
 export default {
   __init__: [
-    'calculateNameBehavior'
+    // 'calculateNameBehavior',
+    'groupIntersectionBehavior'
   ],
-  calculateNameBehavior: [ 'type', CalculateNameBehavior ]
+  // calculateNameBehavior: [ 'type', CalculateNameBehavior ],
+  groupIntersectionBehavior: [ 'type', ActorUpdateInterceptor ]
 };
