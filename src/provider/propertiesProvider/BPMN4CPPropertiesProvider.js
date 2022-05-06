@@ -118,7 +118,7 @@ function createGeneralTabGroups(
 }
 
 function createActorTabGroups(
-    element, bpmnFactory, canvas, elementRegistry, modeling, translate) {
+    element, bpmnFactory, canvas, elementRegistry, modeling, commandStack, translate) {
 
     const actorsGroup = {
         id: 'actors',
@@ -138,7 +138,7 @@ function createActorTabGroups(
         label: 'Actor Details',
     };
 
-    actorDetails(actorDetailsGroup, element, bpmnFactory, options,
+    actorDetails(actorDetailsGroup, element, bpmnFactory, commandStack, options,
         translate);
     return [
         actorsGroup,
@@ -165,8 +165,8 @@ export default function BPMN4CPPropertiesProvider(
     elementRegistry,
     eventBus,
     modeling,
-    translate) {
-
+    translate,
+    commandStack) {
     PropertiesActivator.call(this, eventBus);
 
     this.getTabs = function (element) {
@@ -188,7 +188,7 @@ export default function BPMN4CPPropertiesProvider(
                 id: 'actors',
                 label: 'Actors',
                 groups: createActorTabGroups(element, bpmnFactory, canvas,
-                    elementRegistry, modeling, translate),
+                    elementRegistry, modeling, commandStack, translate),
             };
             tabs.push(actorsTab);
         }
