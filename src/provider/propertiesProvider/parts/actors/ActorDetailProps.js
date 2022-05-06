@@ -8,7 +8,7 @@ const updateCodeSelectionBox = require('../helper/CodeSystemSelectionHelper').up
 const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
 
 const ACTOR_CODESYSTEM_URL = "http://www.helict.de/fhir/CodeSystem/lux/actors";
-let cachedCodeSystems = new Map();
+window.cachedCodeSystems = window.cachedCodeSystems || new Map();
 
 export default function (group, element, bpmnFactory, commandStack, options, translate) {
 
@@ -33,7 +33,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
         props.name = getCodeName(
             ACTOR_CODESYSTEM_URL,
             code,
-            cachedCodeSystems);
+            window.cachedCodeSystems);
         return cmdHelper.updateBusinessObject(elem, getSelectedActor(elem, node), props);
     }
 
@@ -50,7 +50,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
             let newCode = {
                 name: display
             }
-            addCodeToCachedCodesystem(ACTOR_CODESYSTEM_URL, newCode, cachedCodeSystems).catch(() => {
+            addCodeToCachedCodesystem(ACTOR_CODESYSTEM_URL, newCode, window.cachedCodeSystems).catch(() => {
                 return undefined;
             }).then(result => {
                 if (result) {
@@ -60,7 +60,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
                     throw Error(translate("Uups! Something went wrong. Please ask your administrator!"))
                 }
             }).then(() => {
-                updateFhirCodeSystemPromise(ACTOR_CODESYSTEM_URL, cachedCodeSystems);
+                updateFhirCodeSystemPromise(ACTOR_CODESYSTEM_URL, window.cachedCodeSystems);
             })
 
         }
@@ -85,7 +85,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
     });
     actorSelectBox.setControlValue = (
         elem, entryNode, inputNode, inputName, newValue) => {
-        getCodeSystemPromise(ACTOR_CODESYSTEM_URL, cachedCodeSystems).catch(() => {
+        getCodeSystemPromise(ACTOR_CODESYSTEM_URL, window.cachedCodeSystems).catch(() => {
             return [];
         }).then(codes => {
             updateCodeSelectionBox(inputNode, codes, newValue, true);

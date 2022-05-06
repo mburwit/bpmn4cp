@@ -9,7 +9,7 @@ const updateCodeSelectionBox = require('./helper/CodeSystemSelectionHelper').upd
 const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
 
 const OBSERVATION_TYPES_URL = "http://www.helict.de/fhir/CodeSystem/vCare/observations";
-let cachedCodeSystems = new Map();
+window.cachedCodeSystems = window.cachedCodeSystems || new Map();
 
 export default function (group, element, bpmnFactory, options, translate) {
 
@@ -43,7 +43,7 @@ export default function (group, element, bpmnFactory, options, translate) {
             props.name = getCodeName(
                 OBSERVATION_TYPES_URL,
                 code,
-                cachedCodeSystems);
+                window.cachedCodeSystems);
             return cmdHelper.updateBusinessObject(elem, getSelectedObservation(elem, node), props);
         },
         validate: function (elem, node) {
@@ -57,7 +57,7 @@ export default function (group, element, bpmnFactory, options, translate) {
     });
     observationTypeSelectBox.setControlValue = function (
         elem, entryNode, inputNode, inputName, newValue) {
-        codeSystemPromise(OBSERVATION_TYPES_URL, cachedCodeSystems).catch(() => {
+        codeSystemPromise(OBSERVATION_TYPES_URL, window.cachedCodeSystems).catch(() => {
             return [];
         }).then(codes => {
             updateCodeSelectionBox(inputNode, codes, newValue, true);
