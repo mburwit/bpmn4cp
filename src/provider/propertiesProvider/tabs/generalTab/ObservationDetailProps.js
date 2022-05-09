@@ -2,9 +2,9 @@ import {is} from 'bpmn-js/lib/util/ModelUtil';
 
 const entryFactory = require(
     'bpmn-js-properties-panel/lib/factory/EntryFactory');
-const codeSystemPromise = require('./helper/CodeSystemSelectionHelper').getCodeSystemPromise;
-const getCodeName = require('./helper/CodeSystemSelectionHelper').getCodeName;
-const updateCodeSelectionBox = require('./helper/CodeSystemSelectionHelper').updateCodeSelectionBox;
+const codeSystemPromise = require('../../helper/CodeSystemSelectionHelper').getCodeSystemPromise;
+const getCodeName = require('../../helper/CodeSystemSelectionHelper').getCodeName;
+const updateCodeSelectionBox = require('../../helper/CodeSystemSelectionHelper').updateCodeSelectionBox;
 
 const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
 

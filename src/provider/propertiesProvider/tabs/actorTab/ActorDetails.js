@@ -1,9 +1,9 @@
-const selectBox = require('../helper/PropertiesPanelExtendedEntryFactory').selectBox;
-const getCodeSystemPromise = require('../helper/CodeSystemSelectionHelper').getCodeSystemPromise;
-const addCodeToCachedCodesystem = require('../helper/CodeSystemSelectionHelper').addCodeToCodesystemPromise;
-const updateFhirCodeSystemPromise = require('../helper/CodeSystemSelectionHelper').updateFhirCodeSystemPromise;
-const getCodeName = require('../helper/CodeSystemSelectionHelper').getCodeName;
-const updateCodeSelectionBox = require('../helper/CodeSystemSelectionHelper').updateCodeSelectionBox;
+const selectBox = require('../../helper/PropertiesPanelExtendedEntryFactory').selectBox;
+const getCodeSystemPromise = require('../../helper/CodeSystemSelectionHelper').getCodeSystemPromise;
+const addCodeToCachedCodesystem = require('../../helper/CodeSystemSelectionHelper').addCodeToCodesystemPromise;
+const updateFhirCodeSystemPromise = require('../../helper/CodeSystemSelectionHelper').updateFhirCodeSystemPromise;
+const getCodeName = require('../../helper/CodeSystemSelectionHelper').getCodeName;
+const updateCodeSelectionBox = require('../../helper/CodeSystemSelectionHelper').updateCodeSelectionBox;
 
 const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
 

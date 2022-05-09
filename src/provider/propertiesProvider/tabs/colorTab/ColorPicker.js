@@ -1,4 +1,4 @@
-import colorPicker from './colorPicker/ColorPickerFactory';
+import colorPicker from './ColorPickerFactory';
 import {getFillColor, getStrokeColor} from "bpmn-js/lib/draw/BpmnRenderUtil";
 
 export default function(group, element, modeling, translate) {

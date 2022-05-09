@@ -4,7 +4,7 @@ import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 import {getBusinessObject, is} from 'bpmn-js/lib/util/ModelUtil';
 import {intersects} from "../../../draw/BPMNDIHelper";
 
-const actorHelper = require('../../propertiesProvider/parts/actors/ActorHelper');
+const actorHelper = require('../../propertiesProvider/tabs/actorTab/helper/ActorHelper');
 
 /**
  * A component that makes sure that each created or updated
