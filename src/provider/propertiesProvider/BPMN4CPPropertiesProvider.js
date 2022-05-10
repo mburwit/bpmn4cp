@@ -4,6 +4,7 @@ import PropertiesActivator from 'bpmn-js-properties-panel/lib/PropertiesActivato
 import {generalTab} from "./tabs/GeneralTab";
 import {actorsTab} from "./tabs/ActorTab";
 import {colorTab} from "./tabs/ColorTab";
+import {referenceTab} from "./tabs/ReferenceTab";
 
 export default function BPMN4CPPropertiesProvider(
     bpmnFactory,
@@ -27,6 +28,12 @@ export default function BPMN4CPPropertiesProvider(
             tabs.push(
                 actorsTab(element, bpmnFactory, canvas,
                 elementRegistry, modeling, commandStack, translate)
+            );
+        }
+
+        if (isAny(element, ["bpmn:FlowElement"])) {
+            tabs.push(
+                referenceTab(element, bpmnFactory, canvas, elementRegistry, modeling, commandStack, translate, eventBus)
             );
         }
 

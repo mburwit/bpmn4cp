@@ -1,12 +1,10 @@
 'use strict';
 
 const domify = require("min-dom").domify;
+const createSelectOption = require('./PropertiesPanelExtendedEntryFactory').createSelectOption;
+
 const CodeSystemSelectionHelper = {};
 module.exports = CodeSystemSelectionHelper;
-
-const createOption = function (option) {
-    return '<option value="' + option.value + '">' + option.name + '</option>';
-};
 
 const queryPutFhirCodeSystem = (url, fhirCodeSystem) => {
     if (!url) {
@@ -90,7 +88,7 @@ CodeSystemSelectionHelper.updateCodeSelectionBox = function (
     }
     // add options
     selectOptions.forEach(option => {
-        const template = domify(createOption(option));
+        const template = domify(createSelectOption(option));
         inputNode.appendChild(template);
     });
     // set select value

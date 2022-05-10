@@ -348,5 +348,51 @@ export const METAMODEL = {
         },
       ],
     },
+    {
+      "name": "Reference",
+      'superClass': ['Element'],
+      'meta': {
+        'allowedIn': [
+          'bpmn:FlowElement',
+        ],
+      },
+      "properties": [
+        {
+          "name": "bibItemRef",
+          "type": "BibliographyItem",
+          "isAttr": true,
+          "isReference": true
+        }
+      ]
+    },
+    {
+      "name": "BibliographyItem",
+      "superClass": [
+        "Element"
+      ],
+      "properties": [
+        {
+          "name": "id",
+          "isAttr": true,
+          "type": "String",
+          "isId": true
+        },
+        {
+          "name": "refLabel",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "text",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "link",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
   ],
 };
