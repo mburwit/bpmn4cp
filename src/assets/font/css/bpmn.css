@@ -51,3 +51,10 @@
 .bpmn4cp-icon-virtual:before {
   content: "\eaa1";
 }
+
+.bpp-properties-panel .description .description__text {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}

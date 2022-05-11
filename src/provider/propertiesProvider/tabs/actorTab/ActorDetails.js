@@ -1,4 +1,4 @@
-const selectBox = require('../../helper/PropertiesPanelExtendedEntryFactory').selectBox;
+const selectBox = require('../../helper/factory/PropertiesPanelExtendedEntryFactory').selectBox;
 const getCodeSystemPromise = require('../../helper/CodeSystemSelectionHelper').getCodeSystemPromise;
 const addCodeToCachedCodesystem = require('../../helper/CodeSystemSelectionHelper').addCodeToCodesystemPromise;
 const updateFhirCodeSystemPromise = require('../../helper/CodeSystemSelectionHelper').updateFhirCodeSystemPromise;

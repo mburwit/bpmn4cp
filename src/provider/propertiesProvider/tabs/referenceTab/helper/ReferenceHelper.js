@@ -78,6 +78,18 @@ ReferenceHelper.addReferenceCmdFn = (bpmnFactory, rootElement) => {
     }
 }
 
+ReferenceHelper.bibItemLabel = (bibItem) => {
+    return `[${bibItem.get('refLabel')}] ${bibItem.get('text') || ""}`
+}
+
+ReferenceHelper.bibItemMarkup = (bibItem) => {
+    let markup = `[${bibItem.get('refLabel')}] ${bibItem.get('text') || ""}`;
+    if (bibItem && bibItem.get('link')) {
+        markup += ' ([' + bibItem.get('link') + '](' + bibItem.get('link') + '))';
+    }
+    return markup;
+}
+
 function generateId(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

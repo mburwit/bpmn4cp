@@ -2,7 +2,7 @@ import {domify} from "min-dom";
 import {getBusinessObject} from "bpmn-js/lib/util/ModelUtil";
 import referenceHelper from "./helper/ReferenceHelper";
 import extensionElementsHelper from "bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper";
-import entryFactory from '../../helper/PropertiesPanelExtendedEntryFactory';
+import entryFactory from '../../helper/factory/PropertiesPanelExtendedEntryFactory';
 import cmdHelper from 'bpmn-js-properties-panel/lib/helper/CmdHelper';
 
 export default function (group, canvas, element, bpmnFactory, commandStack, elementRegistry, translate) {
@@ -71,7 +71,7 @@ export default function (group, canvas, element, bpmnFactory, commandStack, elem
             bibliographyItems.filter(bibItem => !referencedBibItems.includes(bibItem)).map(
                 (bibItem) => {
                     return {
-                        name: bibItemOptionLabel(bibItem, translate),
+                        name: referenceHelper.bibItemLabel(bibItem),
                         value: bibItem.id
                     };
                 })
@@ -104,6 +104,10 @@ const referenceList = (element, bpmnFactory, options, translate, elementRegistry
             result.entry.getSelected(elem, node)) || {idx: -1};
 
         return referenceHelper.getReferences(bo)[selection.idx];
+    }
+
+    function handleOptionControlClick(event) {
+        console.log(event);
     }
 
     function removeReference(bo) {
@@ -152,15 +156,12 @@ const referenceList = (element, bpmnFactory, options, translate, elementRegistry
             setOptionLabelValue: function (elem, node, option, property, value, idx) {
                 const referencedBibItems = referenceHelper.getReferencedBibItems(getBusinessObject(elem));
                 const bibItem = referencedBibItems[idx];
-                option.text = bibItemOptionLabel(bibItem, translate)
-            }
+                option.text = referenceHelper.bibItemLabel(bibItem);
+            },
+            optionCtrlClick: handleOptionControlClick
         });
     }
     return result;
-}
-
-function bibItemOptionLabel(bibItem, translate) {
-    return `[${bibItem.get('refLabel')}] ${translate(bibItem.get('text') || "")}`
 }
 
 

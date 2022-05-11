@@ -1,7 +1,7 @@
 'use strict';
 
 const domify = require("min-dom").domify;
-const createSelectOption = require('./PropertiesPanelExtendedEntryFactory').createSelectOption;
+const createSelectOption = require('./factory/PropertiesPanelExtendedEntryFactory').createSelectOption;
 
 const CodeSystemSelectionHelper = {};
 module.exports = CodeSystemSelectionHelper;
