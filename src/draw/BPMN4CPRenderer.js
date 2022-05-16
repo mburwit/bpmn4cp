@@ -1969,8 +1969,7 @@ export default function BPMN4CPRenderer(
 
     function appendBibliographyRefs(label, element) {
         const references = getReferences(getBusinessObject(element));
-        if (references && references.length > 1) {
-            console.log(references);
+        if (references && references.length > 0) {
             return `${label} [${references.map(r => r.bibItemRef.refLabel).sort().join(',')}]`;
         } else {
             return label;

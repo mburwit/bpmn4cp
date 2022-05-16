@@ -353,7 +353,7 @@ export const METAMODEL = {
       'superClass': ['Element'],
       'meta': {
         'allowedIn': [
-          'bpmn:FlowElement',
+          'bpmn:BaseElement',
         ],
       },
       "properties": [
