@@ -25,7 +25,7 @@ ExtendedEntryFactory.textBox = function (translate, options) {
     // add replace default description with customized description below text box entry field
     if (description) {
         const domDescription = domQuery('.description', textBox.html);
-        textBox.html.replaceChild(entryFieldDescription(translate, description, { show: canBeShown && 'isShown' }), domDescription);
+        textBox.html.replaceChild(entryFieldDescription(translate, description, {show: canBeShown && 'isShown'}), domDescription);
     }
     return textBox;
 }
@@ -55,7 +55,7 @@ ExtendedEntryFactory.selectBox = function (translate, options) {
         const select = domQuery('select', resource.html);
 
         const wrapper = domify(
-            '<div class="bpp-field-wrapper bpp-select">' +
+            '<div class="bpp-field-wrapper bpp-select default-size">' +
             '</div>');
         wrapper.appendChild(select);
 
@@ -89,7 +89,11 @@ ExtendedEntryFactory.extensionElementsEntry = function (element, bpmnFactory, op
     const onSelectionChange = options.onSelectionChange;
     const defaultSize = options.size || 5,
         resizable = options.resizable,
-        optionCtrlClick = options.optionCtrlClick;
+        optionCtrlClick = options.optionCtrlClick,
+        createElement = options.createExtensionElement,
+        canCreate = typeof createElement === 'function',
+        removeElement = options.removeExtensionElement,
+        canRemove = typeof removeElement === 'function';
 
     const selectionChanged = function (element, node, event, scope) {
         if (typeof onSelectionChange === 'function') {
@@ -105,6 +109,10 @@ ExtendedEntryFactory.extensionElementsEntry = function (element, bpmnFactory, op
         return '<option value="' + escapeHTML(value) + '" data-value data-name="extensionElementValue" onClick=' + optionCtrlClick || "none" + '>' + escapeHTML(value) + '</option>';
     };
     let resource = extensionElementsEntry(element, bpmnFactory, options, translate);
+
+    if (canRemove && !canCreate) {
+        resource.html = resource.html.replace(/class="action-button clear([^"]*)"/, 'class="action-button clear$1 no-add"');
+    }
 
     resource.createListEntryTemplate = function (value, index, selectBox) {
         initSelectionSize(selectBox, selectBox.options.length + 1);

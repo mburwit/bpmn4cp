@@ -58,3 +58,11 @@
   white-space: -o-pre-wrap;
   word-wrap: break-word;
 }
+
+.bpp-properties-panel .action-button.clear.no-add {
+  right: 0;
+}
+
+.bpp-select.default-size select {
+  height: 26px;
+}
