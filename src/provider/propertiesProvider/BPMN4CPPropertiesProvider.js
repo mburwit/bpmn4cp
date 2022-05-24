@@ -31,7 +31,7 @@ export default function BPMN4CPPropertiesProvider(
             );
         }
 
-        if (isAny(element, ["bpmn:BaseElement"]) && !isAny(element, ["bpmn:Collaboration"])) {
+        if (isAny(element, ["bpmn:BaseElement"]) && !isAny(element, ["bpmn:Process", "bpmn:Collaboration"])) {
             tabs.push(
                 referenceTab(element, bpmnFactory, canvas, elementRegistry, modeling, commandStack, translate, eventBus)
             );
