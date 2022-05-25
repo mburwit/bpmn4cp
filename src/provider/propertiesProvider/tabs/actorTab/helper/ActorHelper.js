@@ -9,14 +9,17 @@ const ActorHelper = {};
 module.exports = ActorHelper;
 
 ActorHelper.getActors = function(bo) {
+    let actors = [];
     if (bo) {
         if (isAny(bo, ['bpmn:Activity', 'bpmn:CategoryValue'])) {
-            return bo && extensionElementsHelper.getExtensionElements(bo, 'cp:Actor') || [];
+            actors = bo && extensionElementsHelper.getExtensionElements(bo, 'cp:Actor') || [];
         } else {
             return this.getActors(bo.categoryValueRef);
         }
     }
-    return [];
+    return actors.sort((a, b) => {
+        return (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0;
+    });
 }
 
 ActorHelper.handleGroupActivityIntersection = function(groups, activity, bpmnFactory) {

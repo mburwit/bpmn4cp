@@ -1,4 +1,5 @@
 import {getBusinessObject, is} from 'bpmn-js/lib/util/ModelUtil';
+import {closest as domClosest, query as domQuery} from "min-dom";
 
 const extensionElementsEntry = require(
         'bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements'),
@@ -13,6 +14,7 @@ export default function(group, element, bpmnFactory, translate) {
   group.entries = group.entries.concat(actorEntry.entries);
   return {
     getSelectedActor: actorEntry.getSelectedActor,
+    getSelectList: actorEntry.getSelectList
   };
 }
 
@@ -22,11 +24,18 @@ const actorList = function (element, bpmnFactory, options, translate) {
 
   const result = {
     getSelectedActor: getSelectedActor,
+    getSelectList: getSelectList
   };
 
   result.entries = [];
 
   let actorEntry;
+
+  function getSelectList(node, id) {
+    const currentTab = domClosest(node, 'div.bpp-properties-tab');
+    const query = 'select[name=selectedExtensionElement]' + (id ? '[id=cam-extensionElements-' + id + ']' : '');
+    return domQuery(query, currentTab);
+  }
 
   function getSelectedActor(elem, node) {
     const selection = (actorEntry &&

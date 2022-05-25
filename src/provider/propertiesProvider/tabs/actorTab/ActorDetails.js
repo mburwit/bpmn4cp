@@ -17,6 +17,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
     options = options || {};
 
     const getSelectedActor = options.getSelectedActor;
+    const getSelectList = options.getSelectList;
 
     const getActorName = (elem, node) => {
         const actor = getSelectedActor(elem, node);
@@ -24,6 +25,12 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
         return {
             code: actorCode,
         };
+    }
+
+    const predictIndex = (newCode, existingCodes) => {
+        return existingCodes.filter(code => {
+            return code && code < newCode;
+        }).length;
     }
 
     const setActorNameCmd = (elem, values, node) => {
@@ -36,7 +43,9 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
             ACTOR_CODESYSTEM_URL,
             code,
             window.cachedCodeSystems);
-        return cmdHelper.updateBusinessObject(elem, getSelectedActor(elem, node), props);
+        const selectedActor = getSelectedActor(elem, node);
+        getSelectList(node).selectedIndex = predictIndex(code, actorHelper.getActors(getBusinessObject(elem)).map(value => value.code));
+        return cmdHelper.updateBusinessObject(elem, selectedActor, props);
     }
 
     const setActorName = (cmd) => {
