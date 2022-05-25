@@ -74,11 +74,14 @@ CodeSystemSelectionHelper.updateCodeSelectionBox = function (
             return selectedValue === code.code || !excludedValues.includes(code.code)
         })
         .map(
-        code => {
-            return {
-                name: code.name,
-                value: code.code
-            };
+            code => {
+                return {
+                    name: code.name,
+                    value: code.code
+                };
+            })
+        .sort((a, b) => {
+            return (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0;
         });
     // add empty param
     if (emptyParam) {
