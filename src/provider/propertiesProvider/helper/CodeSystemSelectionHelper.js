@@ -68,9 +68,13 @@ const getCodeObject = function (url, theCode, cachedCodeSystems) {
 };
 
 CodeSystemSelectionHelper.updateCodeSelectionBox = function (
-    inputNode, codes, selectedValue, emptyParam) {
-    let selectOptions = codes.map(
-        (code) => {
+    inputNode, codes, selectedValue, emptyParam, excludedValues) {
+    let selectOptions = codes
+        .filter(code => {
+            return selectedValue === code.code || !excludedValues.includes(code.code)
+        })
+        .map(
+        code => {
             return {
                 name: code.name,
                 value: code.code

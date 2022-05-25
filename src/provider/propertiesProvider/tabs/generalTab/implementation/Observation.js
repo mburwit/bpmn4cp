@@ -1,34 +1,17 @@
 'use strict';
 
-import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil';
+import { getBusinessObject } from 'bpmn-js/lib/util/ModelUtil';
 
 const extensionElementsEntry = require(
   'bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements'),
   extensionElementsHelper = require(
     'bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper'),
   cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper'),
-  elementHelper = require('bpmn-js-properties-panel/lib/helper/ElementHelper');
+  elementHelper = require('bpmn-js-properties-panel/lib/helper/ElementHelper'),
+observationHelper = require('../helper/ObservationHelper');
 
-function getObservations(bo, type) {
-  return bo && extensionElementsHelper.getExtensionElements(bo, type) || [];
-}
 
 export default function(element, bpmnFactory, options, translate) {
-
-  const CP_OBSERVATION_FEATURE = 'cp:ObservationFeature';
-  const CP_GOAL_STATE = 'cp:GoalState';
-
-  function getExtensionElementType(elem) {
-    const CP_OBSERVATION_ELEMENT = 'cp:Observation';
-    const CP_GOAL_ELEMENT = 'cp:Goal';
-
-    if (is(elem, CP_OBSERVATION_FEATURE)) {
-      return CP_OBSERVATION_ELEMENT;
-    }
-    if (is(elem, CP_GOAL_STATE)) {
-      return CP_GOAL_ELEMENT;
-    }
-  }
 
   let bo;
 
@@ -36,7 +19,7 @@ export default function(element, bpmnFactory, options, translate) {
     getSelectedObservation: getSelectedObservation,
   };
 
-  const entries = result.entries = [];
+  result.entries = [];
 
   let observationEntry;
 
@@ -44,12 +27,12 @@ export default function(element, bpmnFactory, options, translate) {
     const selection = (observationEntry &&
       observationEntry.getSelected(elem, node)) || { idx: -1 };
 
-    return getObservations(bo, getExtensionElementType(element))[selection.idx];
+    return observationHelper.getObservations(element)[selection.idx];
   }
 
-  function setOptionLabelValue(type) {
+  function setOptionLabelValue() {
     return function(elem, node, option, property, value, idx) {
-      const observations = getObservations(bo, type);
+      const observations = observationHelper.getObservations(elem);
       const observation = observations[idx];
       option.text = (observation.get('name')) ?
         translate(observation.get('name')) :
@@ -58,7 +41,7 @@ export default function(element, bpmnFactory, options, translate) {
   }
 
   function newElement(elem, type, initialObservationName) {
-    return function(e, extensionElements, value) {
+    return function(e, extensionElements) {
       const props = {
         name: initialObservationName,
       };
@@ -71,9 +54,9 @@ export default function(element, bpmnFactory, options, translate) {
     };
   }
 
-  function removeElement(elem, type) {
+  function removeElement() {
     return function(e, extensionElements, value, idx) {
-      const observations = getObservations(bo, type);
+      const observations = observationHelper.getObservations(e);
       const observation = observations[idx];
       if (observation) {
         return extensionElementsHelper.removeEntry(bo, element, observation);
@@ -90,26 +73,22 @@ export default function(element, bpmnFactory, options, translate) {
       label: translate('Observations'),
       modelProperty: 'name',
       idGeneration: 'false',
-      // reference: 'processRef',
 
       createExtensionElement: newElement(element,
-        getExtensionElementType(element),
+        observationHelper.getExtensionElementType(element),
         'undefined'),
-      removeExtensionElement: removeElement(element,
-        getExtensionElementType(element)),
+      removeExtensionElement: removeElement(),
 
       getExtensionElements: function() {
-        return getObservations(bo, getExtensionElementType(element));
+        return observationHelper.getObservations(element);
       },
 
       setOptionLabelValue: setOptionLabelValue(
-        getExtensionElementType(element)),
+        observationHelper.getExtensionElementType(element)),
 
     });
-    entries.push(observationEntry);
-
+    result.entries.push(observationEntry);
   }
-  // }
 
   return result;
 

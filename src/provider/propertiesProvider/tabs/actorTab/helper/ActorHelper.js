@@ -8,12 +8,6 @@ const ActorHelper = {};
 
 module.exports = ActorHelper;
 
-/**
- * Get the timer definition type for a given timer event definition.
- *
- * @param {ModdleElement<bpmn:TimerEventDefinition>} bo
- *
- */
 ActorHelper.getActors = function(bo) {
     if (bo) {
         if (isAny(bo, ['bpmn:Activity', 'bpmn:CategoryValue'])) {

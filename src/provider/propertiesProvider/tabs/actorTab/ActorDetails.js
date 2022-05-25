@@ -1,3 +1,5 @@
+import {getBusinessObject} from "bpmn-js/lib/util/ModelUtil";
+
 const selectBox = require('../../helper/factory/PropertiesPanelExtendedEntryFactory').selectBox;
 const getCodeSystemPromise = require('../../helper/CodeSystemSelectionHelper').getCodeSystemPromise;
 const addCodeToCachedCodesystem = require('../../helper/CodeSystemSelectionHelper').addCodeToCodesystemPromise;
@@ -6,7 +8,7 @@ const getCodeName = require('../../helper/CodeSystemSelectionHelper').getCodeNam
 const updateCodeSelectionBox = require('../../helper/CodeSystemSelectionHelper').updateCodeSelectionBox;
 
 const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
-
+const actorHelper = require('./helper/ActorHelper');
 const ACTOR_CODESYSTEM_URL = "http://www.helict.de/fhir/CodeSystem/lux/actors";
 window.cachedCodeSystems = window.cachedCodeSystems || new Map();
 
@@ -54,13 +56,13 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
                 return undefined;
             }).then(result => {
                 if (result) {
-                    updateCodeSelectionBox(inputNode, result.codes, result.newCode.code, true);
+                    updateCodeSelectionBox(inputNode, result.codes, result.newCode.code, true, actorHelper.getActors(getBusinessObject(element)).map(value => value.code));
                     setActorName(setActorNameCmd(element, newCode, inputNode));
                 } else {
                     throw Error(translate("Uups! Something went wrong. Please ask your administrator!"))
                 }
             }).then(() => {
-                updateFhirCodeSystemPromise(ACTOR_CODESYSTEM_URL, window.cachedCodeSystems);
+                return updateFhirCodeSystemPromise(ACTOR_CODESYSTEM_URL, window.cachedCodeSystems);
             })
 
         }
@@ -88,7 +90,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
         getCodeSystemPromise(ACTOR_CODESYSTEM_URL, window.cachedCodeSystems).catch(() => {
             return [];
         }).then(codes => {
-            updateCodeSelectionBox(inputNode, codes, newValue, true);
+            updateCodeSelectionBox(inputNode, codes, newValue, true, actorHelper.getActors(getBusinessObject(elem)).map(value => value.code));
         });
     };
     group.entries.push(actorSelectBox);

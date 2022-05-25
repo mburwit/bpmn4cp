@@ -6,7 +6,8 @@ const codeSystemPromise = require('../../helper/CodeSystemSelectionHelper').getC
 const getCodeName = require('../../helper/CodeSystemSelectionHelper').getCodeName;
 const updateCodeSelectionBox = require('../../helper/CodeSystemSelectionHelper').updateCodeSelectionBox;
 
-const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
+const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper'),
+observationHelper = require('./helper/ObservationHelper');
 
 const OBSERVATION_TYPES_URL = "http://www.helict.de/fhir/CodeSystem/vCare/observations";
 window.cachedCodeSystems = window.cachedCodeSystems || new Map();
@@ -60,7 +61,7 @@ export default function (group, element, bpmnFactory, options, translate) {
         codeSystemPromise(OBSERVATION_TYPES_URL, window.cachedCodeSystems).catch(() => {
             return [];
         }).then(codes => {
-            updateCodeSelectionBox(inputNode, codes, newValue, true);
+            updateCodeSelectionBox(inputNode, codes, newValue, true, observationHelper.getObservations(elem).map(value => value.code));
         });
     };
     group.entries.push(observationTypeSelectBox);
