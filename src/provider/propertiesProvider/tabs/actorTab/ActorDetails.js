@@ -9,7 +9,7 @@ const updateCodeSelectionBox = require('../../helper/CodeSystemSelectionHelper')
 
 const cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
 const actorHelper = require('./helper/ActorHelper');
-const ACTOR_CODESYSTEM_URL = "http://www.helict.de/fhir/CodeSystem/lux/actors";
+const ACTOR_CODESYSTEM_URL = "https://www.helict.de/fhir/CodeSystem/lux/actors";
 window.cachedCodeSystems = window.cachedCodeSystems || new Map();
 
 export default function (group, element, bpmnFactory, commandStack, options, translate) {
