@@ -59,7 +59,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
         let display = prompt(translate("Enter new actor"));
         if (display != null && display !== "") {
             let newCode = {
-                name: display
+                name: display.replaceAll(/["|']/gi, "")
             }
             addCodeToCachedCodesystem(ACTOR_CODESYSTEM_URL, newCode, window.cachedCodeSystems).catch(() => {
                 return undefined;
