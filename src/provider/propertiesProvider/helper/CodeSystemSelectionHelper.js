@@ -41,7 +41,7 @@ const queryGetFhirCodeSystem = async (url) => {
     } else {
         return {
             fhir: fhirBundle.entry[0].resource,
-            codes: fhirBundle.entry[0].resource.concept.map(
+            codes: fhirBundle.entry[0].resource.concept ? fhirBundle.entry[0].resource.concept.map(
                 (concept) => {
                     return {
                         name: concept.display,
@@ -49,7 +49,7 @@ const queryGetFhirCodeSystem = async (url) => {
                         definition: concept.definition
                     };
                 },
-            )
+            ) : []
         };
     }
 };
