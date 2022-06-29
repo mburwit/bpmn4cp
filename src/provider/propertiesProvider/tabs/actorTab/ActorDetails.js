@@ -29,7 +29,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
 
     const predictIndex = (newCode, existingCodes) => {
         return existingCodes.filter(code => {
-            return code && code < newCode;
+            return code && Intl.Collator().compare(code, newCode) < 0;
         }).length;
     }
 
@@ -65,7 +65,7 @@ export default function (group, element, bpmnFactory, commandStack, options, tra
                 return undefined;
             }).then(result => {
                 if (result) {
-                    updateCodeSelectionBox(inputNode, result.codes, result.newCode.code, true, actorHelper.getActors(getBusinessObject(element)).map(value => value.code));
+                    getSelectList(node).selectedIndex = predictIndex(props.name, actorHelper.getActors(getBusinessObject(elem)).map(value => value.display));
                     setActorName(setActorNameCmd(element, newCode, inputNode));
                 } else {
                     throw Error(translate("Uups! Something went wrong. Please ask your administrator!"))

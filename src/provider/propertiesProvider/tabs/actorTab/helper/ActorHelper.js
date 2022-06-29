@@ -17,9 +17,7 @@ ActorHelper.getActors = function(bo) {
             return this.getActors(bo.categoryValueRef);
         }
     }
-    return actors.sort((a, b) => {
-        return (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0;
-    });
+    return actors.sort((a, b) => Intl.Collator().compare(a.name, b.name));
 }
 
 ActorHelper.handleGroupActivityIntersection = function(groups, activity, bpmnFactory) {

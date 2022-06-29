@@ -80,9 +80,7 @@ CodeSystemSelectionHelper.updateCodeSelectionBox = function (
                     value: code.code
                 };
             })
-        .sort((a, b) => {
-            return (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0;
-        });
+        .sort((a, b) => Intl.Collator().compare(a.name, b.name));
     // add empty param
     if (emptyParam) {
         selectOptions = [{name: '', value: undefined}].concat(
